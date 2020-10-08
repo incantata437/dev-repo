@@ -9,6 +9,7 @@ import time
 #user3 = byaga@demo.local : Baba Yaga
 #user4 = patreides@demo.local : Paul Atreides
 #local ip = 192.168.1.15
+#SMB test variables
 data_dir = "/usr/local/testdata3/"
 mountcmd = ["mount", 
             "-t cifs", 
@@ -16,19 +17,37 @@ mountcmd = ["mount",
             "/mnt/byaga"]
 targetdir = "/mnt/byaga"
 
-##mount the user1 share as user1
+##variables to mount the user1 share as hwick
+hwick_data_dir = "/usr/local/testdata1/"
+hwick_targetdir = "/mnt/hwick"
+hwick_mntcmd = ["mount", "-t nfs", 
+                "-O user=hwick,pass=Password123!", 
+                "//192.168.1.22/ifs/home/DEMO/hwick", 
+                "/mnt/hwick"]
 
-##mount the user2 share as user2
+##variables to mount the user2 share as jwick
+jwick_data_dir = "/usr/local/testdata2/"
+jwick_targetdir = "/mnt/jwick"
 
+jwick_mntcmd = ["mount", "-t nfs", 
+                "-O user=jwick,pass=Password123!", 
+                "//192.168.1.22/ifs/home/DEMO/jwick", 
+                "/mnt/jwick"]
 #begin test loop
 
-while loopcount < 15:
-    do something here
+while loopcount < 20:
 
 
 ##user1
 ##Begin writing user1 test data group
 ##lots of small files
+#copy data folder from host to Isilon
+    os.chdir = (data_dir)
+    subprocess.check_output(mountcmd)
+    for filename in os.listdir(data_dir):
+        subprocess.check_output("cp", filename, targetdir) 
+        time.sleep(20)
+    continue
 
 ##user2
 ##Count/wait 10  Begin reading large file back
