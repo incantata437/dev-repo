@@ -9,7 +9,7 @@ import time
 #user3 = byaga@demo.local : Baba Yaga
 #user4 = patreides@demo.local : Paul Atreides
 #local ip = 192.168.1.15
-#SMB test variables
+#SMB test variables  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Missing the SMB server IP!!!!!!!!!!!!!!!!!!!!!
 data_dir = "/usr/local/testdata3/"
 mountcmd = ["mount", 
             "-t cifs", 
@@ -34,58 +34,60 @@ jwick_mountcmd = ["mount", "-t nfs",
                 "//192.168.1.22/ifs/home/DEMO/jwick", 
                 "/mnt/jwick"]
 #begin test loop
-# user some other loop than while!!!!!!!!!!!!!!!!!!!
-while loopcount < 20:   #  <<<<-------
+for x in range (20):   #  <<<<-------
 
 
 ##smb user
 ##Begin writing smb user test data group
-##lots of small files
+##lots of small files ending with the extension .fle
 #copy data folder from host to Isilon
-    os.chdir = (data_dir)
+    os.chdir(data_dir)
     subprocess.check_output(mountcmd)
     for filename in os.listdir(data_dir):
         subprocess.check_output("cp", filename, targetdir) 
-        time.sleep(20)
+        time.sleep(5)
     continue
 
 ##user1
-##Count/wait 10  Begin reading large file back
 # # large files should be placed on the Isilon home dir folder for hwick for this test
 #copy data folder from host to Isilon
-    os.chdir = (hwick_data_dir)
+    os.chdir(hwick_data_dir)
     subprocess.check_output(hwick_mountcmd)
     for filename in os.listdir(hwick_targetdir):
-        subprocess.check_output("cp", filename, hwick_data_dir) 
+        subprocess.check_output("cp", hwick_targetdir + "/" + filename, hwick_data_dir) 
 #        time.sleep(20)
     continue
 
 
 ##user2
-## Begin reading back user1 2nd batch with pauses
 # # many small files should be placed on the local folder for hwick for this test
 #copy data folder from host to Isilon
-    os.chdir = (jwick_data_dir)
+    os.chdir(jwick_data_dir)
     subprocess.check_output(jwick_mountcmd)
     for filename in os.listdir(jwick_targetdir):
-        subprocess.check_output("cp", filename, hwick_data_dir) 
-        time.sleep(5)
+        subprocess.check_output("cp", jwick_targetdir + "/" + filename, hwick_data_dir) 
+        time.sleep(2)
     continue
 
 
 
-
+#remove SMB data to start over
 #close SMB share
-
+    os.chdir(targetdir)
+    subprocess.check_output(["rm", "*.fle"])
     subprocess.check_output(["umount", "/mnt/byaga"])
 
 ##user1 
 ##Delete target data on Isilon
+    os.chdir(hwick_data_dir)
+    subprocess.check_output(["rm", "*.fle"])
+    subprocess.check_output(["umount", "/mnt/hwick"])
 
+    
 ##user2 
 #remove locale large file
+    os.chdir(jwick_data_dir)
+    subprocess.check_output(["rm", "*.fle"])
+    subprocess.check_output(["umount", "/mnt/jwick"])
 
-##user3 
-#remove data folder on Isilon
-
-##repeat loop count of 10
+exit(0)
