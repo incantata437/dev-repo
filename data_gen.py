@@ -1,7 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import os
-import os_path
 from faker import Faker
 
 #Prompt for target directory for deployed data
@@ -10,9 +9,16 @@ from faker import Faker
 #Prompt for number of output files
 
 fake = Faker()
+Faker.seed(22)
+_para = int(input("Number of sentences in paragraph of text:  "))
+_numFiles = int(input("Number of files needed: "))
+_begin_dir = input("Full path to start writing files: ")
 
-_lines = input("Number of lines of text:  ")
-_length = input("How many characters per line:  ")
+os.chdir(_begin_dir)
 
-
-
+for x in range(_numFiles):
+    _filename = fake.ein() + '.txt'
+    f = open(_filename, "w")
+    f.writelines(fake.paragraphs(_para))
+    f.close()
+    
