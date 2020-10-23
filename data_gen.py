@@ -1,12 +1,11 @@
 #!/usr/bin/python3
+#Only python 3 is supported
+#use pip install Faker before running this script
+
 
 import os
 from faker import Faker
 
-#Prompt for target directory for deployed data
-#Prompt for number of directory depth
-#Prompt for output file size
-#Prompt for number of output files
 
 fake = Faker()
 Faker.seed(22)
