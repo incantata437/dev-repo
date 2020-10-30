@@ -41,10 +41,10 @@ f.write(OneFSS3_access)
 f.write(OneFSS3_pwd)
 
 f.close()
-
+os.chdir("/root")
 fc = open(".credentials", 'w')
 fc.write("username=Administrator\n")
-fc.write("password="Danger0us\n")
+fc.write("password=Danger0us\n")
 fc.close()
 
 
@@ -53,7 +53,7 @@ os.chdir("/etc")
 #define mount statements
 _isiX_mnt = "hop-isi-x.solarch.lab.emc.com:/ifs     /mnt/NFSisix     nfs     defaults 0  0\n"
 _cascades_mnt = "10.246.26.230:/ifs/devteam         /mnt/NFScascades nfs     defaults 0  0\n"
-_SMBremote_mnt = "//10.246.156.183/Data"            /mnt/SMBremote   cifs    defautls 0  0\n"
+_SMBremote_mnt = "//10.246.156.183/Data            /mnt/SMBremote   cifs    credentials=/root/.credentials 0  0\n"
 
 #edit the fstab
 fstb = open("fstab", 'a')
@@ -64,5 +64,5 @@ fstb.close()
 
 subprocess.check_output(["mount", "-a"])
 #oddball mount command because of security
-subprocess.check_output("mount", "-t nfs", hop-isi-y.solarch.lab.emc.com, "-O username=root,password=@llianc3", "/mnt/NFSisiy")
+subprocess.check_output("mount", "-t nfs", "hop-isi-y.solarch.lab.emc.com:/ifs/data/ISOs", "-O username=root,password=@llianc3", "/mnt/NFSisiy")
 
