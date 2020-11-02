@@ -64,5 +64,5 @@ fstb.close()
 
 subprocess.check_output(["mount", "-a"])
 #oddball mount command because of security
-subprocess.check_output("mount", "-t nfs", "hop-isi-y.solarch.lab.emc.com:/ifs/data/ISOs", "-O username=root,password=@llianc3", "/mnt/NFSisiy")
+subprocess.check_output("mount", "-t nfs", "-O username=root,password=@llianc3", "hop-isi-y.solarch.lab.emc.com:/ifs/data/ISOs", "/mnt/NFSisiy")
 
