@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import os
 import sys
 import subprocess 
@@ -13,7 +13,9 @@ import time
 data_dir = "/usr/local/testdata3/"
 mountcmd = ["mount", 
             "-t cifs", 
+            #add actual network cifs share here
             "-o username=byaga@demo.local,password=Password123!",
+            "//192.168.1.22/ifs/home/DEMO/byaga/",
             "/mnt/byaga"]
 targetdir = "/mnt/byaga"
 
@@ -21,8 +23,8 @@ targetdir = "/mnt/byaga"
 hwick_data_dir = "/usr/local/testdata1/"
 hwick_targetdir = "/mnt/hwick"
 hwick_mountcmd = ["mount", "-t nfs", 
-                "-O user=hwick,pass=Password123!", 
-                "//192.168.1.22/ifs/home/DEMO/hwick", 
+                "-O username=hwick,password=Password123!", 
+                "192.168.1.22:/ifs/home/DEMO/hwick", 
                 "/mnt/hwick"]
 
 ##variables to mount the user2 share as jwick
@@ -30,8 +32,8 @@ jwick_data_dir = "/usr/local/testdata2/"
 jwick_targetdir = "/mnt/jwick"
 
 jwick_mountcmd = ["mount", "-t nfs", 
-                "-O user=jwick,pass=Password123!", 
-                "//192.168.1.22/ifs/home/DEMO/jwick", 
+                "-O username=jwick,password=Password123!", 
+                "192.168.1.22:/ifs/home/DEMO/jwick", 
                 "/mnt/jwick"]
 #begin test loop
 for x in range (20):   #  <<<<-------
