@@ -42,7 +42,7 @@ jwick_mountcmd = ["mount", "-t nfs",
 print ("begin loop for 20 passes")
 
 for x in range (20):
-    print ("pass #" + x )  <<<<-------
+    print ("pass #" + x )  
 
 
 
