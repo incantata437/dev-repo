@@ -10,6 +10,7 @@ import time
 #user4 = patreides@demo.local : Paul Atreides
 #local ip = 192.168.1.15
 #SMB test variables  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Missing the SMB server IP!!!!!!!!!!!!!!!!!!!!!
+print ("attempting to mount byaga CIFS")
 data_dir = "/usr/local/testdata3/"
 mountcmd = ["mount", 
             "-t cifs", 
@@ -20,6 +21,7 @@ mountcmd = ["mount",
 targetdir = "/mnt/byaga"
 
 ##variables to mount the user1 share as hwick
+print ("attempting to mount hwick NFS")
 hwick_data_dir = "/usr/local/testdata1/"
 hwick_targetdir = "/mnt/hwick"
 hwick_mountcmd = ["mount", "-t nfs", 
@@ -28,6 +30,7 @@ hwick_mountcmd = ["mount", "-t nfs",
                 "/mnt/hwick"]
 
 ##variables to mount the user2 share as jwick
+print ("attempting to mount jwick")
 jwick_data_dir = "/usr/local/testdata2/"
 jwick_targetdir = "/mnt/jwick"
 
@@ -36,7 +39,11 @@ jwick_mountcmd = ["mount", "-t nfs",
                 "192.168.1.22:/ifs/home/DEMO/jwick", 
                 "/mnt/jwick"]
 #begin test loop
-for x in range (20):   #  <<<<-------
+print ("begin loop for 20 passes")
+
+for x in range (20):
+    print ("pass #" + x )  <<<<-------
+
 
 
 ##smb user
