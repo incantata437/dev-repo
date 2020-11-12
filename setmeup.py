@@ -12,16 +12,16 @@ subprocess.check_output(["mkdir", "/mnt/isiSMBdata"])
 #Object
 # 
 ECS_label = "[ecsaccess]\n"
-ECS_access = "aws_access_key_id=mkv1\n"
-ECS_pwd = "aws_secret_access_key=zfmqrEF/3VoQ6l7JBcdJ8ccswnjBvdjAb6yF7ZFZ\n"
+ECS_access = "aws_access_key_id={your bucket}\n"
+ECS_pwd = "aws_secret_access_key={your access password}\n"
 
 GCP_label = "[gcpaccess]\n"
-GCP_access = "aws_access_key_id=GOOGL3BI66SSXDDBCSVKZJ6S\n"
-GCP_pwd = "aws_secret_access_key=rzFk2kz/crHk1AKtwinL0FYJeUoq5VyJNoMb2d8T\n"
+GCP_access = "aws_access_key_id={google access id}\n"
+GCP_pwd = "aws_secret_access_key={google password key}\n"
 
 OneFSS3_label = "[onefsS3access]\n"
-OneFSS3_access = "aws_access_key_id=objectuser\n"
-OneFSS3_pwd = "aws_secret_access_key=2G4PA2Ziy_FUgeOxAdhFpFWihHkj\n"
+OneFSS3_access = "aws_access_key_id={your cluster account user\n"
+OneFSS3_pwd = "aws_secret_access_key={cluster object password}\n"
 
 
 os.chdir("/opt/dataiq/maunakea/aws")
@@ -43,8 +43,8 @@ f.write(OneFSS3_pwd)
 f.close()
 os.chdir("/root")
 fc = open(".credentials", 'w')
-fc.write("username=Administrator\n")
-fc.write("password=Danger0us\n")
+fc.write("username=administrator\n")
+fc.write("password={your password}\n")
 fc.close()
 
 
