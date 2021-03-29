@@ -2,12 +2,11 @@
 import os
 import subprocess
 #optional line to create /mnt/ssd if not using a separate parition already established
-#subprocess.check_output(["mkdir", "/mnt/ssd"])
-subprocess.check_output(["mkdir", "/mnt/NFSisix"])
+subprocess.check_output(["mkdir", "/mnt/ssd"])
 subprocess.check_output(["mkdir", "/mnt/NFSisiy"])
 subprocess.check_output(["mkdir", "/mnt/NFScascades"])
 subprocess.check_output(["mkdir", "/mnt/SMBremote"])
-subprocess.check_output(["mkdir", "/mnt/isiSMBdata"])
+#subprocess.check_output(["mkdir", "/mnt/isiSMBdata"])
 
 #Object
 # 
@@ -43,7 +42,7 @@ f.write(OneFSS3_pwd)
 f.close()
 os.chdir("/root")
 fc = open(".credentials", 'w')
-fc.write("username=administrator\n")
+fc.write("username=root\n")
 fc.write("password={your password}\n")
 fc.close()
 
@@ -51,13 +50,13 @@ fc.close()
 os.chdir("/etc")
 
 #define mount statements
-_isiX_mnt = "hop-isi-x.solarch.lab.emc.com:/ifs     /mnt/NFSisix     nfs     defaults 0  0\n"
+#_isiY_mnt = "hop-isi-y.solarch.lab.emc.com:/ifs     /mnt/NFSisiy     nfs     defaults 0  0\n"
 _cascades_mnt = "10.246.26.230:/ifs/devteam         /mnt/NFScascades nfs     defaults 0  0\n"
-_SMBremote_mnt = "//10.246.156.183/Data            /mnt/SMBremote   cifs    credentials=/root/.credentials 0  0\n"
+_SMBremote_mnt = "//10.246.26.231/SMBremote            /mnt/SMBremote   cifs    credentials=/root/.credentials 0  0\n"
 
 #edit the fstab
 fstb = open("fstab", 'a')
-fstb.write(_isiX_mnt)
+#fstb.write(_isiY_mnt)
 fstb.write(_cascades_mnt)
 fstb.write(_SMBremote_mnt)
 fstb.close()
